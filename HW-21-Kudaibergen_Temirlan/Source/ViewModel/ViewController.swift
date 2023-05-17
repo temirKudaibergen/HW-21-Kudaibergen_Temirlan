@@ -6,15 +6,21 @@
 //
 
 import UIKit
+import Alamofire
 
 
 final class ViewController: UIViewController {
     
     private var cards = [Card]()
     private var filteredArray = [Card]()
-    private var onboardingView: MainView? {
-        guard isViewLoaded else { return nil }
-        return view as? MainView
+    
+//    MARK: Function
+    
+    func alert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alertButton = UIAlertAction(title: "Ok", style: .default)
+        alert.addAction(alertButton)
+        present(alert, animated: true, completion: nil)
     }
 
 //    MARK: Lifecyle
@@ -34,16 +40,17 @@ final class ViewController: UIViewController {
 //    MARK: Setup
     
     private func configureView() {
-        title = "Home Work 21"
         navigationController?.navigationBar.prefersLargeTitles = true
         let viewController = MainView()
         viewController.delegate = self
         view = viewController
+        view.backgroundColor = .white
     }
 }
 
 extension ViewController: MainViewDelegate {
-    func selectedCell(selectedSetting: Card) {
+    
+    func selectedCell(selectedSetting: Card?) {
         let viewController = DetailViewViewController()
         viewController.card = selectedSetting
         navigationController?.pushViewController(viewController, animated: true)

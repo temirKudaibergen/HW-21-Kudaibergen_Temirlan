@@ -7,15 +7,17 @@
 
 import UIKit
 import SnapKit
+import Alamofire
 
 protocol MainViewDelegate: AnyObject {
-    func selectedCell(selectedSetting: Card)
+    func selectedCell(selectedSetting: Card?)
 }
 
 final class MainView: UIView {
     
+    weak var viewController: ViewController?
     weak var delegate: MainViewDelegate?
-    private var cards = [Card]()
+    private var cards = [Card?]()
     private var filteredArray = [Card]()
     
 //    MARK: UI
@@ -23,7 +25,7 @@ final class MainView: UIView {
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero,
                                     style: .grouped)
-        tableView.register(ViewController.self,
+        tableView.register(CustomTableViewCell.self,
                            forCellReuseIdentifier: "cell")
         tableView.dataSource = self
         tableView.delegate = self
@@ -36,13 +38,14 @@ final class MainView: UIView {
         textField.textColor = .black
         textField.textAlignment = .left
         textField.backgroundColor = .white
+        textField.layer.cornerRadius = 10
         return textField
     }()
     
     private lazy var serachButton: UIButton = {
        let button = UIButton()
         button.clipsToBounds = true
-        button.backgroundColor = .gray
+        button.backgroundColor = .lightGray
         button.setTitle("Search", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 10
@@ -55,10 +58,10 @@ final class MainView: UIView {
     private lazy var stack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
-        stack.distribution = .fill
+        stack.distribution = .equalSpacing
         stack.addArrangedSubview(textField)
         stack.addArrangedSubview(serachButton)
-        stack.spacing = 10
+        stack.spacing = 7
         return stack
     }()
     
@@ -75,6 +78,7 @@ final class MainView: UIView {
     private func commonInit() {
         setupViews()
         setupLayout()
+        fetchCard()
     }
     
 //    MARK: Setup
@@ -85,15 +89,18 @@ final class MainView: UIView {
     }
     
     private func setupLayout() {
-        tableView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+        stack.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(110)
+            $0.left.equalToSuperview().offset(20)
+            $0.height.equalTo(35)
+            $0.width.equalTo(350)
         }
         
-        stack.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(-10)
-            $0.left.equalToSuperview().offset(-5)
-            $0.right.equalToSuperview().offset(5)
-            $0.height.equalTo(170)
+        tableView.snp.makeConstraints {
+            $0.top.equalTo(stack).offset(50)
+            $0.left.equalToSuperview()
+            $0.right.equalToSuperview()
+            $0.bottom.equalToSuperview()
         }
     }
     
@@ -102,9 +109,8 @@ final class MainView: UIView {
     @objc
     private func serchCard() {
         filteredArray.removeAll()
-        
         if textField.hasText {
-            for card in cards {
+            for card in filteredArray {
                 if card.name == textField.text {
                     filteredArray.append(card)
                     tableView.reloadData()
@@ -132,26 +138,55 @@ extension MainView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if filteredArray.isEmpty {
             let info = cards[indexPath.row]
-            let cell = UITableViewCell(style: .subtitle,
-                                       reuseIdentifier: "Subtitle2")
-            cell.textLabel?.text = info.name
-            cell.detailTextLabel?.text = info.type
-            cell.accessoryType = .disclosureIndicator
-            return cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell",
+                                                     for: indexPath) as? CustomTableViewCell
+            cell?.textLabel?.text = info?.name
+            cell?.detailTextLabel?.text = info?.type
+            cell?.accessoryType = .disclosureIndicator
+            return cell ?? UITableViewCell()
         } else {
             let info = filteredArray[indexPath.row]
-            let cell = UITableViewCell(style: .subtitle,
-                                       reuseIdentifier: "Subtitle2")
-            cell.textLabel?.text = info.name
-            cell.detailTextLabel?.text = info.type
-            cell.accessoryType = .disclosureIndicator
-            return cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell",
+                                                     for: indexPath) as? CustomTableViewCell
+            cell?.textLabel?.text = info.name
+            cell?.detailTextLabel?.text = info.type
+            cell?.accessoryType = .disclosureIndicator
+            return cell ?? UITableViewCell()
         }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let viewController = DetailViewViewController()
-        tableView.deselectRow(at: indexPath, animated: true)
-        viewController.card = cards[indexPath.row]
+        if let selectedSetting = cards[indexPath.row] {
+        delegate?.selectedCell(selectedSetting: selectedSetting)
+        }
     }
+}
+
+extension MainView {
+    func fetchCard() {
+               if filteredArray.isEmpty {
+                   let request = AF.request("https://api.magicthegathering.io/v1/cards")
+                   request.responseDecodable(of: Cards.self) { [self] (data) in
+                   guard let cardData = data.value else {
+                       viewController?.alert(title: "Error", message: "Data loading error")
+                       return
+                   }
+                   let cards = cardData.cards
+                   self.cards = cards
+                   tableView.reloadData()
+                   }
+               } else {
+                   let request = AF.request("https://api.magicthegathering.io/v1/cards")
+                   request.responseDecodable(of: Cards.self) { [self] (data) in
+                       guard let cardData = data.value else {
+                           viewController?.alert(title: "Error", message: "Data loading error")
+                           return
+                       }
+                       let cards = cardData.cards
+                       self.filteredArray = cards
+                       
+                       tableView.reloadData()
+                   }
+               }
+           }
 }

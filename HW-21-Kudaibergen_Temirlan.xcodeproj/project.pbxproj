@@ -17,6 +17,8 @@
 		C82A1CE62A124E3E004A7BC4 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82A1CE52A124E3E004A7BC4 /* Model.swift */; };
 		C82A1CE92A125080004A7BC4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C82A1CE82A125080004A7BC4 /* SnapKit */; };
 		C82A1CEB2A13A7E3004A7BC4 /* DetailViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82A1CEA2A13A7E3004A7BC4 /* DetailViewViewController.swift */; };
+		C8E9A6A72A14BD6F00FFAC46 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E9A6A62A14BD6F00FFAC46 /* CustomTableViewCell.swift */; };
+		C8E9A6A92A14DBD000FFAC46 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E9A6A82A14DBD000FFAC46 /* DetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		C82A1CE22A124C8C004A7BC4 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		C82A1CE52A124E3E004A7BC4 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		C82A1CEA2A13A7E3004A7BC4 /* DetailViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewViewController.swift; sourceTree = "<group>"; };
+		C8E9A6A62A14BD6F00FFAC46 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		C8E9A6A82A14DBD000FFAC46 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +66,6 @@
 				430D7B443E6BC81DCD003FDC /* Pods-HW-21-Kudaibergen_Temirlan.debug.xcconfig */,
 				B710275E6B7D7E6B938A8BC7 /* Pods-HW-21-Kudaibergen_Temirlan.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -152,6 +155,8 @@
 			isa = PBXGroup;
 			children = (
 				C82A1CE22A124C8C004A7BC4 /* MainView.swift */,
+				C8E9A6A62A14BD6F00FFAC46 /* CustomTableViewCell.swift */,
+				C8E9A6A82A14DBD000FFAC46 /* DetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -214,7 +219,7 @@
 			);
 			mainGroup = C82A1CBB2A124372004A7BC4;
 			packageReferences = (
-				C82A1CE72A125080004A7BC4 /* XCRemoteSwiftPackageReference "SnapKit.git" */,
+				C82A1CE72A125080004A7BC4 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = C82A1CC52A124372004A7BC4 /* Products */;
 			projectDirPath = "";
@@ -285,8 +290,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C82A1CE62A124E3E004A7BC4 /* Model.swift in Sources */,
+				C8E9A6A92A14DBD000FFAC46 /* DetailView.swift in Sources */,
 				C82A1CCC2A124372004A7BC4 /* ViewController.swift in Sources */,
 				C82A1CE32A124C8C004A7BC4 /* MainView.swift in Sources */,
+				C8E9A6A72A14BD6F00FFAC46 /* CustomTableViewCell.swift in Sources */,
 				C82A1CC82A124372004A7BC4 /* AppDelegate.swift in Sources */,
 				C82A1CEB2A13A7E3004A7BC4 /* DetailViewViewController.swift in Sources */,
 				C82A1CCA2A124372004A7BC4 /* SceneDelegate.swift in Sources */,
@@ -503,7 +510,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C82A1CE72A125080004A7BC4 /* XCRemoteSwiftPackageReference "SnapKit.git" */ = {
+		C82A1CE72A125080004A7BC4 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -516,7 +523,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		C82A1CE82A125080004A7BC4 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C82A1CE72A125080004A7BC4 /* XCRemoteSwiftPackageReference "SnapKit.git" */;
+			package = C82A1CE72A125080004A7BC4 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
