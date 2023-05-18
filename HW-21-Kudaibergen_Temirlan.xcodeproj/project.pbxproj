@@ -7,14 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45EB330C7E1A59C3E799D7F2 /* Pods_HW_21_Kudaibergen_Temirlan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C1A5D0FD504040212535582 /* Pods_HW_21_Kudaibergen_Temirlan.framework */; };
 		C82A1CC82A124372004A7BC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82A1CC72A124372004A7BC4 /* AppDelegate.swift */; };
 		C82A1CCA2A124372004A7BC4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82A1CC92A124372004A7BC4 /* SceneDelegate.swift */; };
 		C82A1CCC2A124372004A7BC4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82A1CCB2A124372004A7BC4 /* ViewController.swift */; };
 		C82A1CD12A124373004A7BC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C82A1CD02A124373004A7BC4 /* Assets.xcassets */; };
 		C82A1CD42A124373004A7BC4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C82A1CD22A124373004A7BC4 /* LaunchScreen.storyboard */; };
+		C82A1CE32A124C8C004A7BC4 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82A1CE22A124C8C004A7BC4 /* MainView.swift */; };
+		C82A1CE62A124E3E004A7BC4 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82A1CE52A124E3E004A7BC4 /* Model.swift */; };
+		C82A1CE92A125080004A7BC4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C82A1CE82A125080004A7BC4 /* SnapKit */; };
+		C82A1CEB2A13A7E3004A7BC4 /* DetailViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82A1CEA2A13A7E3004A7BC4 /* DetailViewViewController.swift */; };
+		C8E9A6A72A14BD6F00FFAC46 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E9A6A62A14BD6F00FFAC46 /* CustomTableViewCell.swift */; };
+		C8E9A6A92A14DBD000FFAC46 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E9A6A82A14DBD000FFAC46 /* DetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		430D7B443E6BC81DCD003FDC /* Pods-HW-21-Kudaibergen_Temirlan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HW-21-Kudaibergen_Temirlan.debug.xcconfig"; path = "Target Support Files/Pods-HW-21-Kudaibergen_Temirlan/Pods-HW-21-Kudaibergen_Temirlan.debug.xcconfig"; sourceTree = "<group>"; };
+		8C1A5D0FD504040212535582 /* Pods_HW_21_Kudaibergen_Temirlan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HW_21_Kudaibergen_Temirlan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B710275E6B7D7E6B938A8BC7 /* Pods-HW-21-Kudaibergen_Temirlan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HW-21-Kudaibergen_Temirlan.release.xcconfig"; path = "Target Support Files/Pods-HW-21-Kudaibergen_Temirlan/Pods-HW-21-Kudaibergen_Temirlan.release.xcconfig"; sourceTree = "<group>"; };
 		C82A1CC42A124372004A7BC4 /* HW-21-Kudaibergen_Temirlan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HW-21-Kudaibergen_Temirlan.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C82A1CC72A124372004A7BC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C82A1CC92A124372004A7BC4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -22,6 +32,11 @@
 		C82A1CD02A124373004A7BC4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C82A1CD32A124373004A7BC4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C82A1CD52A124373004A7BC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C82A1CE22A124C8C004A7BC4 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		C82A1CE52A124E3E004A7BC4 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		C82A1CEA2A13A7E3004A7BC4 /* DetailViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewViewController.swift; sourceTree = "<group>"; };
+		C8E9A6A62A14BD6F00FFAC46 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		C8E9A6A82A14DBD000FFAC46 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +44,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C82A1CE92A125080004A7BC4 /* SnapKit in Frameworks */,
+				45EB330C7E1A59C3E799D7F2 /* Pods_HW_21_Kudaibergen_Temirlan.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C69138BAED33A68C79FA32F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8C1A5D0FD504040212535582 /* Pods_HW_21_Kudaibergen_Temirlan.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8D953DAB3EF06365AF3E4DAC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				430D7B443E6BC81DCD003FDC /* Pods-HW-21-Kudaibergen_Temirlan.debug.xcconfig */,
+				B710275E6B7D7E6B938A8BC7 /* Pods-HW-21-Kudaibergen_Temirlan.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		C82A1CBB2A124372004A7BC4 = {
 			isa = PBXGroup;
 			children = (
 				C82A1CC62A124372004A7BC4 /* HW-21-Kudaibergen_Temirlan */,
 				C82A1CC52A124372004A7BC4 /* Products */,
+				8D953DAB3EF06365AF3E4DAC /* Pods */,
+				1C69138BAED33A68C79FA32F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,7 +92,6 @@
 			children = (
 				C82A1CDC2A1243D7004A7BC4 /* Source */,
 				C82A1CDB2A1243CE004A7BC4 /* Resource */,
-				C82A1CCB2A124372004A7BC4 /* ViewController.swift */,
 			);
 			path = "HW-21-Kudaibergen_Temirlan";
 			sourceTree = "<group>";
@@ -73,6 +108,9 @@
 		C82A1CDC2A1243D7004A7BC4 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				C82A1CE42A124E2D004A7BC4 /* Model */,
+				C82A1CE12A124C64004A7BC4 /* View */,
+				C82A1CE02A124B50004A7BC4 /* ViewModel */,
 				C82A1CDF2A124458004A7BC4 /* Storyboard */,
 				C82A1CDD2A1243F0004A7BC4 /* Application */,
 			);
@@ -104,6 +142,33 @@
 			path = Storyboard;
 			sourceTree = "<group>";
 		};
+		C82A1CE02A124B50004A7BC4 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C82A1CCB2A124372004A7BC4 /* ViewController.swift */,
+				C82A1CEA2A13A7E3004A7BC4 /* DetailViewViewController.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C82A1CE12A124C64004A7BC4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C82A1CE22A124C8C004A7BC4 /* MainView.swift */,
+				C8E9A6A62A14BD6F00FFAC46 /* CustomTableViewCell.swift */,
+				C8E9A6A82A14DBD000FFAC46 /* DetailView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C82A1CE42A124E2D004A7BC4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C82A1CE52A124E3E004A7BC4 /* Model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -111,15 +176,20 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C82A1CD82A124373004A7BC4 /* Build configuration list for PBXNativeTarget "HW-21-Kudaibergen_Temirlan" */;
 			buildPhases = (
+				2FEC4D38154BE9362323A737 /* [CP] Check Pods Manifest.lock */,
 				C82A1CC02A124372004A7BC4 /* Sources */,
 				C82A1CC12A124372004A7BC4 /* Frameworks */,
 				C82A1CC22A124372004A7BC4 /* Resources */,
+				28594CBD8069DD608643A61D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "HW-21-Kudaibergen_Temirlan";
+			packageProductDependencies = (
+				C82A1CE82A125080004A7BC4 /* SnapKit */,
+			);
 			productName = "HW-21-Kudaibergen_Temirlan";
 			productReference = C82A1CC42A124372004A7BC4 /* HW-21-Kudaibergen_Temirlan.app */;
 			productType = "com.apple.product-type.application";
@@ -148,6 +218,9 @@
 				Base,
 			);
 			mainGroup = C82A1CBB2A124372004A7BC4;
+			packageReferences = (
+				C82A1CE72A125080004A7BC4 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = C82A1CC52A124372004A7BC4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -169,13 +242,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		28594CBD8069DD608643A61D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HW-21-Kudaibergen_Temirlan/Pods-HW-21-Kudaibergen_Temirlan-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HW-21-Kudaibergen_Temirlan/Pods-HW-21-Kudaibergen_Temirlan-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HW-21-Kudaibergen_Temirlan/Pods-HW-21-Kudaibergen_Temirlan-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2FEC4D38154BE9362323A737 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HW-21-Kudaibergen_Temirlan-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C82A1CC02A124372004A7BC4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C82A1CE62A124E3E004A7BC4 /* Model.swift in Sources */,
+				C8E9A6A92A14DBD000FFAC46 /* DetailView.swift in Sources */,
 				C82A1CCC2A124372004A7BC4 /* ViewController.swift in Sources */,
+				C82A1CE32A124C8C004A7BC4 /* MainView.swift in Sources */,
+				C8E9A6A72A14BD6F00FFAC46 /* CustomTableViewCell.swift in Sources */,
 				C82A1CC82A124372004A7BC4 /* AppDelegate.swift in Sources */,
+				C82A1CEB2A13A7E3004A7BC4 /* DetailViewViewController.swift in Sources */,
 				C82A1CCA2A124372004A7BC4 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -310,6 +430,7 @@
 		};
 		C82A1CD92A124373004A7BC4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 430D7B443E6BC81DCD003FDC /* Pods-HW-21-Kudaibergen_Temirlan.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -338,6 +459,7 @@
 		};
 		C82A1CDA2A124373004A7BC4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B710275E6B7D7E6B938A8BC7 /* Pods-HW-21-Kudaibergen_Temirlan.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -386,6 +508,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C82A1CE72A125080004A7BC4 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C82A1CE82A125080004A7BC4 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C82A1CE72A125080004A7BC4 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C82A1CBC2A124372004A7BC4 /* Project object */;
 }
