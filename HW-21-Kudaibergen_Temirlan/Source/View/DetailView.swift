@@ -9,69 +9,90 @@ import UIKit
 import SnapKit
 import Alamofire
 
-class DetailView: UIView {
+final class DetailView: UIView {
+    
+    //    MARK: Properties
     
     weak var viewController: ViewController?
     private var cards = [Card?]()
     private var filteredArray = [Card]()
     
-//    MARK: UI
+    //    MARK: UI
+    
     private lazy var cardName: UILabel = {
         let lable = UILabel()
         lable.font = UIFont.systemFont(ofSize: 35)
         lable.textColor = .black
+        lable.numberOfLines = 0
         return lable
     }()
+    
     private lazy var cardType: UILabel = {
         let lable = UILabel()
         lable.font = UIFont.systemFont(ofSize: 15)
         lable.textColor = .black
         return lable
     }()
+    
     private lazy var setName: UILabel = {
         let lable = UILabel()
         lable.font = UIFont.systemFont(ofSize: 15)
         lable.textColor = .black
         return lable
     }()
+    
     private lazy var manaCost: UILabel = {
         let lable = UILabel()
         lable.font = UIFont.systemFont(ofSize: 15)
         lable.textColor = .black
         return lable
     }()
+    
     private lazy var cmc: UILabel = {
         let lable = UILabel()
         lable.font = UIFont.systemFont(ofSize: 15)
         lable.textColor = .black
         return lable
     }()
+    
     private lazy var rarity: UILabel = {
         let lable = UILabel()
         lable.font = UIFont.systemFont(ofSize: 15)
         lable.textColor = .black
         return lable
     }()
+    
     private lazy var artist: UILabel = {
         let lable = UILabel()
         lable.font = UIFont.systemFont(ofSize: 15)
         lable.textColor = .black
         return lable
     }()
+    
     private lazy var textInCard: UILabel = {
         let lable = UILabel()
         lable.font = UIFont.systemFont(ofSize: 15)
+        lable.numberOfLines = 0
         lable.textColor = .black
         return lable
     }()
+    
     private lazy var cardImageView: UIImageView = {
-       let imageView = UIImageView()
+        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         return imageView
     }()
     
-//    MARK: Init
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.style = .large
+        indicator.color = .lightGray
+        indicator.startAnimating()
+        return indicator
+    }()
+    
+    //    MARK: Init
     
     init() {
         super.init(frame: .zero)
@@ -88,7 +109,7 @@ class DetailView: UIView {
         fetchCard()
     }
     
-//    MARK: Setup
+    //    MARK: Setup
     
     private func setupViews() {
         backgroundColor = .white
@@ -101,43 +122,50 @@ class DetailView: UIView {
         addSubview(artist)
         addSubview(textInCard)
         addSubview(cardImageView)
+        addSubview(activityIndicator)
     }
     
     private func setupLayout() {
         cardName.snp.makeConstraints {
-            $0.centerY.equalToSuperview().offset(75)
+            $0.top.equalToSuperview().offset(90)
+            $0.left.equalToSuperview().offset(25)
+            $0.right.equalToSuperview().inset(10)
         }
         cardType.snp.makeConstraints {
-            $0.top.equalTo(cardName).offset(55)
+            $0.top.equalTo(cardName.snp.bottom).offset(30)
             $0.left.equalToSuperview().offset(25)
         }
         setName.snp.makeConstraints {
-            $0.top.equalTo(cardType).offset(20)
+            $0.top.equalTo(cardType).offset(30)
             $0.left.equalToSuperview().offset(25)
         }
         manaCost.snp.makeConstraints {
-            $0.top.equalTo(setName).offset(20)
+            $0.top.equalTo(setName).offset(30)
             $0.left.equalToSuperview().offset(25)
         }
         cmc.snp.makeConstraints {
-            $0.top.equalTo(manaCost).offset(20)
+            $0.top.equalTo(manaCost).offset(30)
             $0.left.equalToSuperview().offset(25)
         }
         rarity.snp.makeConstraints {
-            $0.top.equalTo(cmc).offset(20)
+            $0.top.equalTo(cmc).offset(30)
             $0.left.equalToSuperview().offset(25)
         }
         artist.snp.makeConstraints {
-            $0.top.equalTo(rarity).offset(20)
+            $0.top.equalTo(rarity).offset(30)
             $0.left.equalToSuperview().offset(25)
         }
         textInCard.snp.makeConstraints {
-            $0.top.equalTo(artist).offset(20)
-            $0.left.equalToSuperview().offset(25)
+            $0.top.equalTo(artist).offset(30)
+            $0.left.right.equalToSuperview().inset(25)
         }
         cardImageView.snp.makeConstraints {
-            $0.top.equalTo(textInCard).offset(45)
-            $0.left.equalToSuperview().offset(25)
+            $0.top.equalTo(textInCard.snp.bottom).offset(40)
+            $0.centerX.equalToSuperview()
+            $0.size.equalTo(300)
+        }
+        activityIndicator.snp.makeConstraints {
+            $0.center.equalTo(cardImageView)
         }
     }
     
@@ -150,19 +178,18 @@ class DetailView: UIView {
         rarity.text = "Rarity: \(String(describing: model.rarity ?? "No data"))"
         artist.text = "Artist: \(String(describing: model.artist ?? "No data"))"
         textInCard.text = "Text: \(String(describing: model.text ?? "No data"))"
-        cardImageView.image = UIImage(named: "\(String(describing: model.imageUrl))")
     }
     
     func fetchCard() {
         if filteredArray.isEmpty {
             let request = AF.request("https://api.magicthegathering.io/v1/cards")
             request.responseDecodable(of: Cards.self) { [self] (data) in
-            guard let cardData = data.value else {
-                viewController?.alert(title: "Error", message: "Data loading error")
-                return
-            }
-            let cards = cardData.cards
-            self.cards = cards
+                guard let cardData = data.value else {
+                    viewController?.alert(title: "Error", message: "Data loading error")
+                    return
+                }
+                let cards = cardData.cards
+                self.cards = cards
             }
         } else {
             let request = AF.request("https://api.magicthegathering.io/v1/cards")
@@ -181,7 +208,6 @@ class DetailView: UIView {
 extension DetailView {
     public func makeRequestUrl(urlRequest: String) {
         let urlRequest = URL(string: urlRequest)
-        
         guard let url = urlRequest else  {
             viewController?.alert(title: "Error", message: "Invalid URL")
             return
@@ -203,13 +229,15 @@ extension DetailView {
             } else if let response = response as? HTTPURLResponse {
                 if response.statusCode != 200 {
                     self.viewController?.alert(title: "Error", message: "Response status is \(response.statusCode)")
-            }
+                }
                 guard let data = data else {
                     self.viewController?.alert(title: "Error", message: "No data")
                     return
                 }
                 DispatchQueue.main.async() { [weak self] in
                     self?.cardImageView.image = UIImage(data: data)
+                    self?.activityIndicator.stopAnimating()
+                    self?.activityIndicator.isHidden = true
                 }
             }
         }.resume()

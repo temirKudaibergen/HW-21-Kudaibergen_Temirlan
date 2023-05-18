@@ -11,10 +11,12 @@ import Alamofire
 
 final class ViewController: UIViewController {
     
+    //    MARK: Properties
+    
     private var cards = [Card]()
     private var filteredArray = [Card]()
     
-//    MARK: Function
+    //    MARK: Function
     
     func alert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -22,8 +24,8 @@ final class ViewController: UIViewController {
         alert.addAction(alertButton)
         present(alert, animated: true, completion: nil)
     }
-
-//    MARK: Lifecyle
+    
+    //    MARK: Lifecyle
     
     override func loadView() {
         super.loadView()
@@ -37,7 +39,7 @@ final class ViewController: UIViewController {
         configureView()
     }
     
-//    MARK: Setup
+    //    MARK: Setup
     
     private func configureView() {
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -49,7 +51,6 @@ final class ViewController: UIViewController {
 }
 
 extension ViewController: MainViewDelegate {
-    
     func selectedCell(selectedSetting: Card?) {
         let viewController = DetailViewViewController()
         viewController.card = selectedSetting

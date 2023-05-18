@@ -8,39 +8,33 @@
 import UIKit
 import SnapKit
 
-class CustomTableViewCell: UITableViewCell {
+final class CustomTableViewCell: UITableViewCell {
+    
+    //    MARK: Properties
     
     var card: Card? {
         didSet {
             cardName.text = card?.name
-            cardType.text = card?.type
         }
     }
     
     var filteredArray: Card? {
         didSet {
             cardName.text = card?.name
-            cardType.text = card?.type
         }
     }
     
-//    MARK: UI
+    //    MARK: UI
     
     private lazy var cardName: UILabel = {
-       let lable = UILabel()
+        let lable = UILabel()
         lable.font = UIFont.systemFont(ofSize: 15)
         lable.textColor = .black
         return lable
     }()
     
-    private lazy var cardType: UILabel = {
-       let lable = UILabel()
-        lable.font = UIFont.systemFont(ofSize: 15)
-        lable.textColor = .systemGray
-        return lable
-    }()
+    //    MARK: Lifecyle
     
-//    MARK: Lifecyle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupHierarchy()
@@ -51,11 +45,10 @@ class CustomTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    MARK: Setup
+    //    MARK: Setup
     
     private func setupHierarchy() {
         contentView.addSubview(cardName)
-        contentView.addSubview(cardType)
     }
     
     private func setupLayout() {
@@ -63,14 +56,10 @@ class CustomTableViewCell: UITableViewCell {
             $0.centerY.equalTo(contentView).offset(5)
             $0.left.equalTo(contentView).offset(20)
         }
-        
-        cardType.snp.makeConstraints {
-            $0.centerY.equalTo(cardName).offset(-5)
-            $0.left.equalTo(contentView).offset(20)
-        }
     }
     
     //    MARK: Reuse
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         self.accessoryView = .none

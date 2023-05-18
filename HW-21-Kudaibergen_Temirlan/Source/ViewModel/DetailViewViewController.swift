@@ -7,7 +7,9 @@
 
 import UIKit
 
-class DetailViewViewController: UIViewController {
+final class DetailViewViewController: UIViewController {
+    
+    //    MARK: Properties
     
     var card: Card?
     
@@ -16,11 +18,13 @@ class DetailViewViewController: UIViewController {
         return view as? DetailView
     }
     
-    func configureView() {
+    private func configureView() {
         guard let setting = card else { return }
         onboardingView?.fillSettings(model: setting)
+        guard let picture = card?.imageUrl else { return }
+        onboardingView?.makeRequestUrl(urlRequest: picture)
     }
-
+    
     //    MARK: Lifecyle
     
     override func loadView() {

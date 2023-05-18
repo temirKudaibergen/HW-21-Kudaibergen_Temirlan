@@ -15,12 +15,14 @@ protocol MainViewDelegate: AnyObject {
 
 final class MainView: UIView {
     
+    //    MARK: Properties
+    
     weak var viewController: ViewController?
     weak var delegate: MainViewDelegate?
     private var cards = [Card?]()
     private var filteredArray = [Card]()
     
-//    MARK: UI
+    //    MARK: UI
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero,
@@ -32,7 +34,7 @@ final class MainView: UIView {
         return tableView
     }()
     
-    private lazy var textField: UITextField = {
+    lazy var textField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter the name of the card"
         textField.textColor = .black
@@ -43,7 +45,7 @@ final class MainView: UIView {
     }()
     
     private lazy var serachButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.clipsToBounds = true
         button.backgroundColor = .lightGray
         button.setTitle("Search", for: .normal)
@@ -53,6 +55,14 @@ final class MainView: UIView {
                          action: #selector(serchCard),
                          for: .touchUpInside)
         return button
+    }()
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.style = .large
+        indicator.color = .lightGray
+        indicator.startAnimating()
+        return indicator
     }()
     
     private lazy var stack: UIStackView = {
@@ -65,7 +75,7 @@ final class MainView: UIView {
         return stack
     }()
     
-//    MARK: Initial
+    //    MARK: Initial
     init() {
         super.init(frame: .zero)
         commonInit()
@@ -81,31 +91,36 @@ final class MainView: UIView {
         fetchCard()
     }
     
-//    MARK: Setup
+    //    MARK: Setup
     
     private func setupViews() {
         addSubview(tableView)
         addSubview(stack)
+        addSubview(activityIndicator)
     }
     
     private func setupLayout() {
         stack.snp.makeConstraints {
             $0.top.equalToSuperview().offset(110)
-            $0.left.equalToSuperview().offset(20)
+            $0.left.right.equalToSuperview().inset(10)
             $0.height.equalTo(35)
             $0.width.equalTo(350)
         }
         
         tableView.snp.makeConstraints {
-            $0.top.equalTo(stack).offset(50)
+            $0.top.equalTo(stack.snp.bottom).offset(10)
             $0.left.equalToSuperview()
             $0.right.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
+        
+        activityIndicator.snp.makeConstraints {
+            $0.centerX.centerY.equalToSuperview()
+        }
     }
     
     //    MARK: Actions
-
+    
     @objc
     private func serchCard() {
         filteredArray.removeAll()
@@ -125,68 +140,91 @@ final class MainView: UIView {
 
 //    MARK: Extension
 
-extension MainView: UITableViewDelegate, UITableViewDataSource {
+extension MainView: UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if filteredArray.isEmpty {
-            return cards.count
-        } else {
+        if !filteredArray.isEmpty {
             return filteredArray.count
+        } else {
+            return cards.count
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if filteredArray.isEmpty {
-            let info = cards[indexPath.row]
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell",
-                                                     for: indexPath) as? CustomTableViewCell
-            cell?.textLabel?.text = info?.name
-            cell?.detailTextLabel?.text = info?.type
-            cell?.accessoryType = .disclosureIndicator
-            return cell ?? UITableViewCell()
-        } else {
+        if !filteredArray.isEmpty {
             let info = filteredArray[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell",
                                                      for: indexPath) as? CustomTableViewCell
-            cell?.textLabel?.text = info.name
-            cell?.detailTextLabel?.text = info.type
-            cell?.accessoryType = .disclosureIndicator
+            var content = cell?.defaultContentConfiguration()
+            content?.text = info.name
+            content?.secondaryText = info.type
+            cell?.contentConfiguration = content
+            return cell ?? UITableViewCell()
+        } else {
+            let info = cards[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell",
+                                                     for: indexPath) as? CustomTableViewCell
+            var content = cell?.defaultContentConfiguration()
+            content?.text = info?.name
+            content?.secondaryText = info?.type
+            cell?.contentConfiguration = content
             return cell ?? UITableViewCell()
         }
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let selectedSetting = cards[indexPath.row] {
-        delegate?.selectedCell(selectedSetting: selectedSetting)
+            delegate?.selectedCell(selectedSetting: selectedSetting)
+        }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text {
+            filteredText(text + string)
+        }
+        return true
+    }
+    
+    func filteredText(_ query: String) {
+        filteredArray.removeAll()
+        for card in cards {
+            guard let card = card else { return }
+            if ((card.name.starts(with: query.lowercased()))) {
+                filteredArray.append(card)
+            }
+            tableView.reloadData()
         }
     }
 }
 
 extension MainView {
     func fetchCard() {
-               if filteredArray.isEmpty {
-                   let request = AF.request("https://api.magicthegathering.io/v1/cards")
-                   request.responseDecodable(of: Cards.self) { [self] (data) in
-                   guard let cardData = data.value else {
-                       viewController?.alert(title: "Error", message: "Data loading error")
-                       return
-                   }
-                   let cards = cardData.cards
-                   self.cards = cards
-                   tableView.reloadData()
-                   }
-               } else {
-                   let request = AF.request("https://api.magicthegathering.io/v1/cards")
-                   request.responseDecodable(of: Cards.self) { [self] (data) in
-                       guard let cardData = data.value else {
-                           viewController?.alert(title: "Error", message: "Data loading error")
-                           return
-                       }
-                       let cards = cardData.cards
-                       self.filteredArray = cards
-                       
-                       tableView.reloadData()
-                   }
-               }
-           }
+        if filteredArray.isEmpty {
+            let request = AF.request("https://api.magicthegathering.io/v1/cards")
+            request.responseDecodable(of: Cards.self) { [self] (data) in
+                guard let cardData = data.value else {
+                    viewController?.alert(title: "Error", message: "Data loading error")
+                    return
+                }
+                let cards = cardData.cards
+                self.cards = cards
+                tableView.reloadData()
+                activityIndicator.stopAnimating()
+                activityIndicator.isHidden = true
+            }
+        } else {
+            let request = AF.request("https://api.magicthegathering.io/v1/cards")
+            request.responseDecodable(of: Cards.self) { [self] (data) in
+                guard let cardData = data.value else {
+                    viewController?.alert(title: "Error", message: "Data loading error")
+                    return
+                }
+                let cards = cardData.cards
+                self.filteredArray = cards
+                tableView.reloadData()
+                activityIndicator.stopAnimating()
+                activityIndicator.isHidden = true
+            }
+        }
+    }
 }
